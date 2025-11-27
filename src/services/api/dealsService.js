@@ -1,5 +1,4 @@
 import { toast } from "react-toastify";
-import React from "react";
 import { getApperClient } from "@/services/apperClient";
 
 class DealsService {
@@ -228,9 +227,15 @@ export const create = async (dealData) => {
       const failed = response.results.filter(r => !r.success);
 
       if (failed.length > 0) {
-        console.error(`Failed to create ${failed.length} deals:`, failed);
+console.error(`Failed to create ${failed.length} deals:`, failed);
         failed.forEach(record => {
-          record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error}`));
+          record.errors?.forEach(error => {
+            if (typeof error === 'string') {
+              toast.error(error);
+            } else {
+              toast.error(`${error.fieldLabel || 'Field'}: ${error.message || error}`);
+            }
+          });
           if (record.message) toast.error(record.message);
         });
       }
@@ -276,9 +281,15 @@ export const update = async (dealId, dealData) => {
       const failed = response.results.filter(r => !r.success);
 
       if (failed.length > 0) {
-        console.error(`Failed to update ${failed.length} deals:`, failed);
+console.error(`Failed to update ${failed.length} deals:`, failed);
         failed.forEach(record => {
-          record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error}`));
+          record.errors?.forEach(error => {
+            if (typeof error === 'string') {
+              toast.error(error);
+            } else {
+              toast.error(`${error.fieldLabel || 'Field'}: ${error.message || error}`);
+            }
+          });
           if (record.message) toast.error(record.message);
         });
       }
@@ -322,9 +333,15 @@ export const updateStage = async (dealId, newStage) => {
       const failed = response.results.filter(r => !r.success);
 
       if (failed.length > 0) {
-        console.error(`Failed to update ${failed.length} deal stages:`, failed);
+console.error(`Failed to update ${failed.length} deal stages:`, failed);
         failed.forEach(record => {
-          record.errors?.forEach(error => toast.error(`${error.fieldLabel}: ${error}`));
+          record.errors?.forEach(error => {
+            if (typeof error === 'string') {
+              toast.error(error);
+            } else {
+              toast.error(`${error.fieldLabel || 'Field'}: ${error.message || error}`);
+            }
+          });
           if (record.message) toast.error(record.message);
         });
       }
