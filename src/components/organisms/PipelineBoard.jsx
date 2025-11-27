@@ -81,17 +81,33 @@ const getDealsForStage = (stageName) => {
     handleDragEnd()
   }
 
-  const getStageColor = (stageName) => {
-    switch (stageName.toLowerCase()) {
-      case "won":
+const getStageColorFromData = (stageId) => {
+    const stage = stages.find(s => s.Id === stageId)
+    if (!stage || !stage.color) {
+      return "border-slate-300 bg-slate-50"
+    }
+    
+    // Convert hex color to Tailwind classes
+    const color = stage.color.toLowerCase()
+    switch (color) {
+      case "#10b981":
+      case "#059669":
+      case "#047857":
         return "border-success-500 bg-success-50"
-      case "lost":
+      case "#ef4444":
+      case "#dc2626":
+      case "#b91c1c":
         return "border-error-500 bg-error-50"
-      case "negotiation":
+      case "#f59e0b":
+      case "#d97706":
+      case "#b45309":
         return "border-warning-500 bg-warning-50"
-      case "proposal":
+      case "#3b82f6":
+      case "#2563eb":
+      case "#1d4ed8":
         return "border-primary-500 bg-primary-50"
       default:
+        // For custom colors, use a neutral style with the custom color as accent
         return "border-slate-300 bg-slate-50"
     }
   }
@@ -124,7 +140,7 @@ const getDealsForStage = (stageName) => {
               onDragLeave={handleDragLeave}
               onDrop={(e) => handleDrop(e, stage.name)}
             >
-              <Card className={`h-full ${getStageColor(stage.name)}`}>
+<Card className={`h-full ${getStageColorFromData(stage.Id)}`}>
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-lg font-semibold text-slate-900">
