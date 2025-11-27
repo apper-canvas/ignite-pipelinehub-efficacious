@@ -185,7 +185,7 @@ class ContactsService {
       if (contactData.phone !== undefined) {
         updateFields.phone_c = contactData.phone;
       }
-      if (contactData.company !== undefined) {
+if (contactData.company !== undefined) {
         updateFields.company_c = contactData.company;
       }
       if (contactData.notes !== undefined) {
