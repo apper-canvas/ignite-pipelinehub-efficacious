@@ -370,5 +370,3 @@ class DealsService {
 }
 
 export default new DealsService();
-
-export default new DealsService()

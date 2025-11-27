@@ -238,5 +238,3 @@ class PipelineStagesService {
 }
 
 export default new PipelineStagesService();
-
-export default new PipelineStagesService()
