@@ -91,8 +91,9 @@ const prepareDealForAPI = (dealData) => {
   if (dealData.probability !== undefined) {
     apiData.probability_c = parseInt(dealData.probability) || 0;
   }
-  if (dealData.contactId !== undefined) {
-    apiData.contact_id_c = dealData.contactId;
+if (dealData.contactId !== undefined && dealData.contactId !== null && dealData.contactId !== '') {
+    // Ensure contact_id_c is an integer for Lookup field
+    apiData.contact_id_c = parseInt(dealData.contactId, 10);
   }
   if (dealData.notes !== undefined) {
     apiData.notes_c = dealData.notes;
