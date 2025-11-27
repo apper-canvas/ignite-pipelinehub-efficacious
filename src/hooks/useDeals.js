@@ -26,8 +26,10 @@ export const useDeals = () => {
   const createDeal = async (dealData) => {
     try {
       setError("")
-      const newDeal = await dealsService.create(dealData)
-      setDeals(prev => [...prev, newDeal])
+const newDeal = await dealsService.create(dealData)
+      if (newDeal) {
+        setDeals(prev => [...prev, newDeal])
+      }
       return newDeal
     } catch (err) {
       setError(err.message || "Failed to create deal")
