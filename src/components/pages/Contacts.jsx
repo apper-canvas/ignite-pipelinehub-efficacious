@@ -22,7 +22,7 @@ const Contacts = () => {
   const [tagFilter, setTagFilter] = useState("")
   const [sortConfig, setSortConfig] = useState({ key: "updatedAt", direction: "desc" })
   
-  const { contacts, updateContact, deleteContact, loading: contactsLoading, error: contactsError } = useContacts()
+const { contacts, createContact, updateContact, deleteContact, loading: contactsLoading, error: contactsError } = useContacts()
   const { deals, updateDeal, loading: dealsLoading, error: dealsError } = useDeals()
   const { activities, loading: activitiesLoading, error: activitiesError } = useActivities()
 
@@ -106,11 +106,14 @@ const Contacts = () => {
     }
   }
 
-  const handleSaveContact = async (contactData) => {
+const handleSaveContact = async (contactData) => {
     try {
       if (editingContact) {
         await updateContact(editingContact.Id, contactData)
         toast.success("Contact updated successfully")
+      } else {
+        await createContact(contactData)
+        toast.success("Contact created successfully")
       }
       setIsContactModalOpen(false)
       setEditingContact(null)
