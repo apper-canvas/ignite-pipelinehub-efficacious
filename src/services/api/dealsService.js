@@ -55,7 +55,7 @@ const transformDealData = (deal) => {
   return {
     Id: deal.Id,
     name: deal.Name || deal.title_c || '',
-    title: deal.title_c || deal.Name || '',
+title: deal.title_c || deal.Name || '',
     value: typeof deal.value_c === 'number' ? deal.value_c : parseFloat(deal.value_c) || 0,
     stage: deal.stage_c || 'New',
     priority: deal.priority_c || 'Medium',

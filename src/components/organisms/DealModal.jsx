@@ -16,7 +16,7 @@ const DealModal = ({
   const [formData, setFormData] = useState({
     title: "",
     value: "",
-    stage: "Lead",
+stage: "New",
     priority: "Medium",
     contactId: "",
     expectedCloseDate: "",
@@ -28,10 +28,10 @@ const DealModal = ({
 
   useEffect(() => {
     if (deal) {
-      setFormData({
+setFormData({
         title: deal.title || "",
         value: deal.value || "",
-        stage: deal.stage || "Lead",
+        stage: deal.stage || "New",
         priority: deal.priority || "Medium",
         contactId: deal.contactId || "",
         expectedCloseDate: deal.expectedCloseDate ? format(new Date(deal.expectedCloseDate), "yyyy-MM-dd") : "",
