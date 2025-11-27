@@ -1,14 +1,15 @@
-import React, { useState, Suspense } from "react"
-import PipelineBoard from "@/components/organisms/PipelineBoard"
-import DealModal from "@/components/organisms/DealModal"
-import Button from "@/components/atoms/Button"
-import ApperIcon from "@/components/ApperIcon"
-import { useContacts } from "@/hooks/useContacts"
-import { useDeals } from "@/hooks/useDeals"
-import { usePipelineStages } from "@/hooks/usePipelineStages"
-import Loading from "@/components/ui/Loading"
-import ErrorView from "@/components/ui/ErrorView"
-import { toast } from "react-toastify"
+import React, { Suspense, useState } from "react";
+import { useContacts } from "@/hooks/useContacts";
+import { useDeals } from "@/hooks/useDeals";
+import { usePipelineStages } from "@/hooks/usePipelineStages";
+import { toast } from "react-toastify";
+import { deleteDeal } from "@/services/api/dealsService";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import ErrorView from "@/components/ui/ErrorView";
+import Button from "@/components/atoms/Button";
+import PipelineBoard from "@/components/organisms/PipelineBoard";
+import DealModal from "@/components/organisms/DealModal";
 
 const Pipeline = () => {
   const [editingDeal, setEditingDeal] = useState(null)

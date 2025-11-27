@@ -23,11 +23,12 @@ export const useDeals = () => {
     loadDeals()
   }, [])
 
-  const createDeal = async (dealData) => {
+const createDeal = async (dealData) => {
     try {
       setError("")
-const newDeal = await dealsService.create(dealData)
+      const newDeal = await dealsService.create(dealData)
       if (newDeal) {
+        // Add the new deal to the local state immediately
         setDeals(prev => [...prev, newDeal])
       }
       return newDeal
