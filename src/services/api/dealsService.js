@@ -82,8 +82,14 @@ const prepareDealForAPI = (dealData) => {
   if (dealData.value !== undefined) {
     apiData.value_c = parseFloat(dealData.value) || 0;
   }
-  if (dealData.stage !== undefined) {
-    apiData.stage_c = dealData.stage;
+if (dealData.stage !== undefined) {
+    // Validate stage against database picklist values
+    const validStages = ['New', 'Qualification', 'Proposal', 'Negotiation', 'Won', 'Lost'];
+    if (validStages.includes(dealData.stage)) {
+      apiData.stage_c = dealData.stage;
+    } else {
+      throw new Error(`Invalid stage value: ${dealData.stage}. Valid values are: ${validStages.join(', ')}`);
+    }
   }
   if (dealData.priority !== undefined) {
     apiData.priority_c = dealData.priority;

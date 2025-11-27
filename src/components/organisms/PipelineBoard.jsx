@@ -119,7 +119,7 @@ const PipelineBoard = ({
                       <span className="text-sm text-slate-600">
                         {stageDeals.length}
                       </span>
-<Button 
+                      <Button 
                         size="icon" 
                         variant="ghost" 
                         className="h-6 w-6"
@@ -138,7 +138,7 @@ const PipelineBoard = ({
                 <CardContent className="pt-0">
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {stageDeals.map((deal) => (
-<div
+                      <div
                         key={deal.Id}
                         draggable
                         onDragStart={() => handleDragStart(deal)}
@@ -150,7 +150,7 @@ const PipelineBoard = ({
                           contact={getContactForDeal(deal.contactId)}
                           onEdit={onEditDeal}
                           onDelete={onDeleteDeal}
-isDragging={draggedDeal?.Id === deal.Id}
+                          isDragging={draggedDeal?.Id === deal.Id}
                         />
                       </div>
                     ))}

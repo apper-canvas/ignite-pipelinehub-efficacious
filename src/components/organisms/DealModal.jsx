@@ -160,9 +160,10 @@ const DealModal = ({
               onChange={(e) => handleChange("stage", e.target.value)}
               required
             >
-{stages.map((stage) => (
-                <option key={stage.Id} value={stage.name}>
-                  {stage.name}
+{/* Use exact database picklist values */}
+              {['New', 'Qualification', 'Proposal', 'Negotiation', 'Won', 'Lost'].map((stageName) => (
+                <option key={stageName} value={stageName}>
+                  {stageName}
                 </option>
               ))}
             </FormField>
