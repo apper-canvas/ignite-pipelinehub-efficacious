@@ -17,8 +17,23 @@ const PipelineBoard = ({
   const [draggedDeal, setDraggedDeal] = useState(null)
   const [dragOverStage, setDragOverStage] = useState(null)
 
-  const getDealsForStage = (stageName) => {
-    return deals.filter(deal => deal.stage === stageName)
+const getDealsForStage = (stageName) => {
+    if (!deals || deals.length === 0) return []
+    
+    return deals.filter(deal => {
+      // Ensure we have valid deal and stage data
+      if (!deal || !deal.stage || !stageName) return false
+      
+      // Normalize stage names for comparison (handle case sensitivity)
+      const dealStage = String(deal.stage).trim()
+      const targetStage = String(stageName).trim()
+      
+      // Direct comparison first
+      if (dealStage === targetStage) return true
+      
+      // Case-insensitive comparison as fallback
+      return dealStage.toLowerCase() === targetStage.toLowerCase()
+    })
   }
 
   const getContactForDeal = (contactId) => {
