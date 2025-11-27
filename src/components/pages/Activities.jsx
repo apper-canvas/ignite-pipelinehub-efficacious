@@ -31,7 +31,7 @@ const Activities = () => {
   
 const { contacts, loading: contactsLoading, error: contactsError } = useContacts()
   const { deals, loading: dealsLoading, error: dealsError } = useDeals()
-  const { activities, loading: activitiesLoading, error: activitiesError, refetch: refetchActivities } = useActivities()
+const { activities, loading: activitiesLoading, error: activitiesError, createActivity } = useActivities()
 
   const loading = contactsLoading || dealsLoading || activitiesLoading
   const error = contactsError || dealsError || activitiesError
@@ -81,7 +81,7 @@ const { contacts, loading: contactsLoading, error: contactsError } = useContacts
     setIsSubmitting(true)
     
     try {
-      const activityData = {
+const activityData = {
         type: formData.type,
         description: formData.description,
         contactId: formData.contactId ? parseInt(formData.contactId) : null,
@@ -90,7 +90,7 @@ const { contacts, loading: contactsLoading, error: contactsError } = useContacts
         userId: 1 // Mock user ID
       }
       
-      await activitiesService.create(activityData)
+      await createActivity(activityData)
       
       // Reset form and close modal
       setFormData({
@@ -101,11 +101,6 @@ const { contacts, loading: contactsLoading, error: contactsError } = useContacts
       })
       setFormErrors({})
       setIsModalOpen(false)
-      
-      // Refresh activities list
-      if (refetchActivities) {
-        refetchActivities()
-      }
       
       toast.success("Activity logged successfully!")
       
