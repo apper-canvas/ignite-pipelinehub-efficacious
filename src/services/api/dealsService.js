@@ -1,4 +1,4 @@
-import dealsData from "@/services/mockData/deals.json"
+import dealsData from "@/services/mockData/deals.json";
 
 class DealsService {
   constructor() {
@@ -26,13 +26,13 @@ class DealsService {
     return [...this.deals]
   }
 
-  async getById(id) {
+async getById(id) {
     await this.delay()
     const deal = this.deals.find(d => d.Id === parseInt(id))
     return deal ? { ...deal } : null
   }
 
-  async create(dealData) {
+async create(dealData) {
     await this.delay()
     
     const maxId = this.deals.reduce((max, deal) => Math.max(max, deal.Id), 0)
@@ -48,7 +48,7 @@ class DealsService {
     return { ...newDeal }
   }
 
-  async update(id, dealData) {
+async update(id, dealData) {
     await this.delay()
     
     const index = this.deals.findIndex(d => d.Id === parseInt(id))
@@ -67,7 +67,7 @@ class DealsService {
     return { ...this.deals[index] }
   }
 
-  async delete(id) {
+async delete(id) {
     await this.delay()
     
     const index = this.deals.findIndex(d => d.Id === parseInt(id))

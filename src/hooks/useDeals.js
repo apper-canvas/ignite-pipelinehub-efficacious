@@ -37,9 +37,9 @@ export const useDeals = () => {
 
   const updateDeal = async (id, dealData) => {
     try {
-      setError("")
+setError("")
       const updatedDeal = await dealsService.update(id, dealData)
-      setDeals(prev => prev.map(d => d.Id === id ? updatedDeal : d))
+      setDeals(prev => prev.map(d => d.Id === parseInt(id) ? updatedDeal : d))
       return updatedDeal
     } catch (err) {
       setError(err.message || "Failed to update deal")
@@ -50,8 +50,8 @@ export const useDeals = () => {
   const deleteDeal = async (id) => {
     try {
       setError("")
-      await dealsService.delete(id)
-      setDeals(prev => prev.filter(d => d.Id !== id))
+await dealsService.delete(id)
+      setDeals(prev => prev.filter(d => d.Id !== parseInt(id)))
     } catch (err) {
       setError(err.message || "Failed to delete deal")
       throw err
@@ -61,8 +61,8 @@ export const useDeals = () => {
   const updateDealStage = async (id, newStage) => {
     try {
       setError("")
-      const updatedDeal = await dealsService.updateStage(id, newStage)
-      setDeals(prev => prev.map(d => d.Id === id ? updatedDeal : d))
+const updatedDeal = await dealsService.updateStage(id, newStage)
+      setDeals(prev => prev.map(d => d.Id === parseInt(id) ? updatedDeal : d))
       return updatedDeal
     } catch (err) {
       setError(err.message || "Failed to update deal stage")

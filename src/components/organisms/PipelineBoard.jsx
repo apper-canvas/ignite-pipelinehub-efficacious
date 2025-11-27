@@ -99,7 +99,7 @@ const PipelineBoard = ({
           const isDragOver = dragOverStage === stage.name
           
           return (
-            <div
+<div
               key={stage.Id}
               className={`flex-shrink-0 w-80 ${
                 isDragOver ? "drop-zone active" : ""
@@ -131,7 +131,7 @@ const PipelineBoard = ({
                 <CardContent className="pt-0">
                   <div className="space-y-3 max-h-96 overflow-y-auto">
                     {stageDeals.map((deal) => (
-                      <div
+<div
                         key={deal.Id}
                         draggable
                         onDragStart={() => handleDragStart(deal)}
@@ -143,7 +143,7 @@ const PipelineBoard = ({
                           contact={getContactForDeal(deal.contactId)}
                           onEdit={onEditDeal}
                           onDelete={onDeleteDeal}
-                          isDragging={draggedDeal?.Id === deal.Id}
+isDragging={draggedDeal?.Id === deal.Id}
                         />
                       </div>
                     ))}
