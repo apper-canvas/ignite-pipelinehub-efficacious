@@ -1,29 +1,134 @@
-import React, { useState, Suspense } from "react"
-import ActivityFeed from "@/components/organisms/ActivityFeed"
-import Button from "@/components/atoms/Button"
-import Select from "@/components/atoms/Select"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card"
-import ApperIcon from "@/components/ApperIcon"
-import { useContacts } from "@/hooks/useContacts"
-import { useDeals } from "@/hooks/useDeals"
-import { useActivities } from "@/hooks/useActivities"
-import Loading from "@/components/ui/Loading"
-import ErrorView from "@/components/ui/ErrorView"
-import { format, startOfWeek, startOfMonth, subWeeks, subMonths } from "date-fns"
+import React, { Suspense, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
+import { useContacts } from "@/hooks/useContacts";
+import { useDeals } from "@/hooks/useDeals";
+import { useActivities } from "@/hooks/useActivities";
+import { format, startOfMonth, startOfWeek, subMonths, subWeeks } from "date-fns";
+import { toast } from "react-toastify";
+import activitiesService from "@/services/api/activitiesService";
+import ApperIcon from "@/components/ApperIcon";
+import Loading from "@/components/ui/Loading";
+import ErrorView from "@/components/ui/ErrorView";
+import Textarea from "@/components/atoms/Textarea";
+import Select from "@/components/atoms/Select";
+import Label from "@/components/atoms/Label";
+import Button from "@/components/atoms/Button";
+import Input from "@/components/atoms/Input";
+import ActivityFeed from "@/components/organisms/ActivityFeed";
 
 const Activities = () => {
   const [timeFilter, setTimeFilter] = useState("all")
   const [typeFilter, setTypeFilter] = useState("all")
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    type: "",
+    description: "",
+    contactId: "",
+    dealId: ""
+  })
+  const [formErrors, setFormErrors] = useState({})
   
-  const { contacts, loading: contactsLoading, error: contactsError } = useContacts()
+const { contacts, loading: contactsLoading, error: contactsError } = useContacts()
   const { deals, loading: dealsLoading, error: dealsError } = useDeals()
-  const { activities, loading: activitiesLoading, error: activitiesError } = useActivities()
+  const { activities, loading: activitiesLoading, error: activitiesError, refetch: refetchActivities } = useActivities()
 
   const loading = contactsLoading || dealsLoading || activitiesLoading
   const error = contactsError || dealsError || activitiesError
 
   if (loading) return <Loading />
   if (error) return <ErrorView error={error} />
+
+  const activityTypes = ["Call", "Email", "Meeting", "Note", "Task", "Follow-up"]
+
+  const validateForm = () => {
+    const errors = {}
+    
+    if (!formData.type.trim()) {
+      errors.type = "Activity type is required"
+    }
+    
+    if (!formData.description.trim()) {
+      errors.description = "Description is required"
+    }
+    
+    setFormErrors(errors)
+    return Object.keys(errors).length === 0
+  }
+
+  const handleFormChange = (field, value) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }))
+    
+    // Clear error when user starts typing
+    if (formErrors[field]) {
+      setFormErrors(prev => ({
+        ...prev,
+        [field]: ""
+      }))
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    
+    if (!validateForm()) {
+      return
+    }
+    
+    setIsSubmitting(true)
+    
+    try {
+      const activityData = {
+        type: formData.type,
+        description: formData.description,
+        contactId: formData.contactId ? parseInt(formData.contactId) : null,
+        dealId: formData.dealId ? parseInt(formData.dealId) : null,
+        timestamp: new Date().toISOString(),
+        userId: 1 // Mock user ID
+      }
+      
+      await activitiesService.create(activityData)
+      
+      // Reset form and close modal
+      setFormData({
+        type: "",
+        description: "",
+        contactId: "",
+        dealId: ""
+      })
+      setFormErrors({})
+      setIsModalOpen(false)
+      
+      // Refresh activities list
+      if (refetchActivities) {
+        refetchActivities()
+      }
+      
+      toast.success("Activity logged successfully!")
+      
+    } catch (error) {
+      console.error("Error creating activity:", error)
+      toast.error("Failed to log activity. Please try again.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const handleCloseModal = () => {
+    if (!isSubmitting) {
+      setIsModalOpen(false)
+      setFormData({
+        type: "",
+        description: "",
+        contactId: "",
+        dealId: ""
+      })
+      setFormErrors({})
+    }
+  }
 
   const getFilteredActivities = () => {
     let filtered = [...activities]
@@ -92,9 +197,8 @@ const Activities = () => {
     }
   }
 
-  const filteredActivities = getFilteredActivities()
+const filteredActivities = getFilteredActivities()
   const stats = getActivityStats()
-  const activityTypes = Array.from(new Set(activities.map(a => a.type))).sort()
 
   const weekChange = stats.lastWeek === 0 ? 100 : 
     Math.round(((stats.thisWeek - stats.lastWeek) / stats.lastWeek) * 100)
@@ -109,11 +213,138 @@ const Activities = () => {
           </p>
         </div>
         
-        <Button>
+<Button onClick={() => setIsModalOpen(true)}>
           <ApperIcon name="Plus" className="h-4 w-4 mr-2" />
           Log Activity
         </Button>
       </div>
+
+      {/* Activity Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+            <div className="sticky top-0 bg-white border-b border-slate-200 px-6 py-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold text-slate-900">Log New Activity</h2>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleCloseModal}
+                  disabled={isSubmitting}
+                >
+                  <ApperIcon name="X" className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="p-6 space-y-4">
+              <div>
+                <Label htmlFor="type" className="text-sm font-medium text-slate-700 mb-1 block">
+                  Activity Type *
+                </Label>
+                <Select
+                  id="type"
+                  value={formData.type}
+                  onChange={(e) => handleFormChange("type", e.target.value)}
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select activity type</option>
+                  {activityTypes.map(type => (
+                    <option key={type} value={type}>{type}</option>
+                  ))}
+                </Select>
+                {formErrors.type && (
+                  <p className="text-sm text-error-600 mt-1">{formErrors.type}</p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="description" className="text-sm font-medium text-slate-700 mb-1 block">
+                  Description *
+                </Label>
+                <Textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => handleFormChange("description", e.target.value)}
+                  placeholder="Describe the activity..."
+                  rows={3}
+                  className="w-full"
+                  disabled={isSubmitting}
+                />
+                {formErrors.description && (
+                  <p className="text-sm text-error-600 mt-1">{formErrors.description}</p>
+                )}
+              </div>
+
+              <div>
+                <Label htmlFor="contactId" className="text-sm font-medium text-slate-700 mb-1 block">
+                  Related Contact (Optional)
+                </Label>
+                <Select
+                  id="contactId"
+                  value={formData.contactId}
+                  onChange={(e) => handleFormChange("contactId", e.target.value)}
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select contact</option>
+                  {contacts?.map(contact => (
+                    <option key={contact.Id} value={contact.Id}>
+                      {contact.firstName} {contact.lastName}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="dealId" className="text-sm font-medium text-slate-700 mb-1 block">
+                  Related Deal (Optional)
+                </Label>
+                <Select
+                  id="dealId"
+                  value={formData.dealId}
+                  onChange={(e) => handleFormChange("dealId", e.target.value)}
+                  className="w-full"
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select deal</option>
+                  {deals?.map(deal => (
+                    <option key={deal.Id} value={deal.Id}>
+                      {deal.title}
+                    </option>
+                  ))}
+                </Select>
+              </div>
+
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-slate-200">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={handleCloseModal}
+                  disabled={isSubmitting}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="min-w-24"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <ApperIcon name="Loader2" className="h-4 w-4 mr-2 animate-spin" />
+                      Saving...
+                    </>
+                  ) : (
+                    "Log Activity"
+                  )}
+                </Button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
 
       {/* Stats Overview */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
