@@ -15,7 +15,7 @@ const Pipeline = () => {
   const [isDealModalOpen, setIsDealModalOpen] = useState(false)
   
   const { contacts, loading: contactsLoading, error: contactsError } = useContacts()
-  const { deals, updateDealStage, updateDeal, deleteDeal, loading: dealsLoading, error: dealsError } = useDeals()
+const { deals, createDeal, updateDealStage, updateDeal, deleteDeal, loading: dealsLoading, error: dealsError } = useDeals()
   const { stages, loading: stagesLoading, error: stagesError } = usePipelineStages()
 
   const loading = contactsLoading || dealsLoading || stagesLoading
@@ -53,16 +53,19 @@ const Pipeline = () => {
     }
   }
 
-  const handleSaveDeal = async (dealData) => {
+const handleSaveDeal = async (dealData) => {
     try {
       if (editingDeal) {
         await updateDeal(editingDeal.Id, dealData)
         toast.success("Deal updated successfully")
+      } else {
+        await createDeal(dealData)
+        toast.success("Deal created successfully")
       }
       setIsDealModalOpen(false)
       setEditingDeal(null)
     } catch (error) {
-      toast.error("Failed to save deal")
+      toast.error(editingDeal ? "Failed to save deal" : "Failed to create deal")
     }
   }
 

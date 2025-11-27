@@ -11,7 +11,8 @@ const PipelineBoard = ({
   onDragStart, 
   onDrop, 
   onEditDeal, 
-  onDeleteDeal 
+  onDeleteDeal,
+  onCreateDeal
 }) => {
   const [draggedDeal, setDraggedDeal] = useState(null)
   const [dragOverStage, setDragOverStage] = useState(null)
@@ -118,7 +119,13 @@ const PipelineBoard = ({
                       <span className="text-sm text-slate-600">
                         {stageDeals.length}
                       </span>
-                      <Button size="icon" variant="ghost" className="h-6 w-6">
+<Button 
+                        size="icon" 
+                        variant="ghost" 
+                        className="h-6 w-6"
+                        onClick={() => onCreateDeal && onCreateDeal(stage.name)}
+                        title={`Add deal to ${stage.name}`}
+                      >
                         <ApperIcon name="Plus" className="h-4 w-4" />
                       </Button>
                     </div>
