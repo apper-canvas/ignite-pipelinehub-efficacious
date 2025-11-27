@@ -160,7 +160,7 @@ const DealModal = ({
               onChange={(e) => handleChange("stage", e.target.value)}
               required
             >
-              {stages.map((stage) => (
+{stages.map((stage) => (
                 <option key={stage.Id} value={stage.name}>
                   {stage.name}
                 </option>

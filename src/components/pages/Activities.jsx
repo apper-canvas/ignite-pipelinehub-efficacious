@@ -285,8 +285,8 @@ const filteredActivities = getFilteredActivities()
                 >
                   <option value="">Select contact</option>
                   {contacts?.map(contact => (
-                    <option key={contact.Id} value={contact.Id}>
-                      {contact.firstName} {contact.lastName}
+<option key={contact.Id} value={contact.Id}>
+                      {contact.name}
                     </option>
                   ))}
                 </Select>
