@@ -1,0 +1,92 @@
+[
+  {
+    "Id": 1,
+    "type": "Call",
+    "description": "Initial discovery call to understand CRM requirements and current pain points",
+    "contactId": 1,
+    "dealId": 1,
+    "timestamp": "2024-03-20T10:00:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 2,
+    "type": "Email",
+    "description": "Sent detailed proposal with implementation timeline and pricing",
+    "contactId": 1,
+    "dealId": 1,
+    "timestamp": "2024-03-18T14:30:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 3,
+    "type": "Meeting",
+    "description": "Technical demo session with development team to showcase API capabilities",
+    "contactId": 2,
+    "dealId": 2,
+    "timestamp": "2024-03-19T15:00:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 4,
+    "type": "Note",
+    "description": "Follow-up required on compliance documentation for financial services requirements",
+    "contactId": 3,
+    "dealId": 3,
+    "timestamp": "2024-03-22T09:15:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 5,
+    "type": "Call",
+    "description": "Contract negotiation call - discussed terms and implementation support",
+    "contactId": 2,
+    "dealId": 2,
+    "timestamp": "2024-03-17T11:30:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 6,
+    "type": "Email",
+    "description": "Congratulations email sent after successful deal closure",
+    "contactId": 4,
+    "dealId": 4,
+    "timestamp": "2024-03-15T16:45:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 7,
+    "type": "Meeting",
+    "description": "Quarterly business review to discuss platform performance and future needs",
+    "contactId": 4,
+    "dealId": 4,
+    "timestamp": "2024-03-10T14:00:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 8,
+    "type": "Call",
+    "description": "Initial outreach call to discuss healthcare data management needs",
+    "contactId": 5,
+    "dealId": 5,
+    "timestamp": "2024-03-25T10:30:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 9,
+    "type": "Note",
+    "description": "Lost deal - competitor offered lower price point that better fit education budget",
+    "contactId": 6,
+    "dealId": 6,
+    "timestamp": "2024-03-01T13:20:00Z",
+    "userId": "user1"
+  },
+  {
+    "Id": 10,
+    "type": "Email",
+    "description": "Technical requirements document sent for construction management solution",
+    "contactId": 7,
+    "dealId": 7,
+    "timestamp": "2024-03-19T12:15:00Z",
+    "userId": "user1"
+  }
+]

@@ -1,0 +1,90 @@
+[
+  {
+    "Id": 1,
+    "name": "Sarah Johnson",
+    "email": "sarah.johnson@techcorp.com",
+    "phone": "+1 (555) 123-4567",
+    "company": "TechCorp Solutions",
+    "tags": ["Enterprise", "Software"],
+    "notes": "Key decision maker for enterprise software solutions. Prefers detailed technical documentation.",
+    "createdAt": "2024-01-15T09:00:00Z",
+    "updatedAt": "2024-03-20T14:30:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Michael Chen",
+    "email": "m.chen@innovatedev.com",
+    "phone": "+1 (555) 987-6543",
+    "company": "InnovateDev",
+    "tags": ["Startup", "Development"],
+    "notes": "CTO at fast-growing startup. Interested in scalable solutions and modern tech stack.",
+    "createdAt": "2024-02-01T11:15:00Z",
+    "updatedAt": "2024-03-18T16:45:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Emily Rodriguez",
+    "email": "emily.rodriguez@globalfinance.com",
+    "phone": "+1 (555) 456-7890",
+    "company": "Global Finance Inc",
+    "tags": ["Finance", "Enterprise", "Compliance"],
+    "notes": "Head of Digital Transformation. Focuses on regulatory compliance and security features.",
+    "createdAt": "2024-01-28T08:30:00Z",
+    "updatedAt": "2024-03-22T10:20:00Z"
+  },
+  {
+    "Id": 4,
+    "name": "David Thompson",
+    "email": "david@retailplus.com",
+    "phone": "+1 (555) 321-0987",
+    "company": "RetailPlus",
+    "tags": ["Retail", "E-commerce"],
+    "notes": "VP of Operations. Looking for inventory management and customer analytics solutions.",
+    "createdAt": "2024-02-10T13:45:00Z",
+    "updatedAt": "2024-03-15T09:10:00Z"
+  },
+  {
+    "Id": 5,
+    "name": "Lisa Wang",
+    "email": "lisa.wang@healthsync.com",
+    "phone": "+1 (555) 654-3210",
+    "company": "HealthSync",
+    "tags": ["Healthcare", "HIPAA"],
+    "notes": "Healthcare IT director. Requires HIPAA-compliant solutions with robust data security.",
+    "createdAt": "2024-02-20T15:20:00Z",
+    "updatedAt": "2024-03-25T11:55:00Z"
+  },
+  {
+    "Id": 6,
+    "name": "Robert Martinez",
+    "email": "robert.martinez@edutech.org",
+    "phone": "+1 (555) 789-0123",
+    "company": "EduTech Institute",
+    "tags": ["Education", "Non-profit"],
+    "notes": "Director of Technology Services. Budget-conscious but values long-term partnerships.",
+    "createdAt": "2024-01-05T07:00:00Z",
+    "updatedAt": "2024-03-12T14:25:00Z"
+  },
+  {
+    "Id": 7,
+    "name": "Amanda Foster",
+    "email": "amanda.foster@constructco.com",
+    "phone": "+1 (555) 234-5678",
+    "company": "ConstructCo",
+    "tags": ["Construction", "Project Management"],
+    "notes": "Project manager looking for field-friendly mobile solutions and real-time collaboration tools.",
+    "createdAt": "2024-02-14T12:30:00Z",
+    "updatedAt": "2024-03-19T16:40:00Z"
+  },
+  {
+    "Id": 8,
+    "name": "James Wilson",
+    "email": "james.wilson@autoparts.com",
+    "phone": "+1 (555) 876-5432",
+    "company": "AutoParts Direct",
+    "tags": ["Automotive", "Supply Chain"],
+    "notes": "Supply chain director focused on inventory optimization and supplier integration.",
+    "createdAt": "2024-01-22T10:45:00Z",
+    "updatedAt": "2024-03-21T13:15:00Z"
+  }
+]
