@@ -42,7 +42,7 @@ setFormData({
       setFormData({
         title: "",
         value: "",
-        stage: stages[0]?.name || "Lead",
+stage: stages[0]?.name || "New",
         priority: "Medium",
         contactId: "",
         expectedCloseDate: "",

@@ -52,10 +52,10 @@ class DealsService {
 const transformDealData = (deal) => {
   if (!deal) return null;
   
-  return {
+return {
     Id: deal.Id,
     name: deal.Name || deal.title_c || '',
-title: deal.title_c || deal.Name || '',
+    title: deal.title_c || deal.Name || '',
     value: typeof deal.value_c === 'number' ? deal.value_c : parseFloat(deal.value_c) || 0,
     stage: deal.stage_c || 'New',
     priority: deal.priority_c || 'Medium',
@@ -82,13 +82,18 @@ const prepareDealForAPI = (dealData) => {
   if (dealData.value !== undefined) {
     apiData.value_c = parseFloat(dealData.value) || 0;
   }
-if (dealData.stage !== undefined) {
+  if (dealData.stage !== undefined) {
     // Validate stage against database picklist values
     const validStages = ['New', 'Qualification', 'Proposal', 'Negotiation', 'Won', 'Lost'];
-    if (validStages.includes(dealData.stage)) {
+    if (dealData.stage && validStages.includes(dealData.stage)) {
       apiData.stage_c = dealData.stage;
+    } else if (dealData.stage) {
+      // If invalid stage provided, log warning and use 'New' as default
+      console.warn(`Invalid stage value: ${dealData.stage}. Using 'New' instead. Valid values are: ${validStages.join(', ')}`);
+      apiData.stage_c = 'New';
     } else {
-      throw new Error(`Invalid stage value: ${dealData.stage}. Valid values are: ${validStages.join(', ')}`);
+      // If no stage provided, default to 'New'
+      apiData.stage_c = 'New';
     }
   }
   if (dealData.priority !== undefined) {
