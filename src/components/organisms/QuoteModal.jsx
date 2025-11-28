@@ -35,8 +35,8 @@ function QuoteModal({ quote, onSave, onClose }) {
     ship_to_country_c: '',
     ship_to_pincode_c: '',
     notes_c: '',
-    total_amount_c: '',
-    discount_c: '',
+total_amount_c: '0',
+    discount_c: '0',
     Tags: ''
   });
 
@@ -111,10 +111,10 @@ function QuoteModal({ quote, onSave, onClose }) {
       newErrors.quote_date_c = 'Quote date is required';
     }
 
-    if (!formData.total_amount_c || parseFloat(formData.total_amount_c) <= 0) {
-      newErrors.total_amount_c = 'Valid total amount is required';
+// Only require total amount for non-draft quotes
+    if (formData.status_c !== 'Draft' && (!formData.total_amount_c || parseFloat(formData.total_amount_c) <= 0)) {
+      newErrors.total_amount_c = 'Valid total amount is required for non-draft quotes';
     }
-
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
