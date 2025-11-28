@@ -182,7 +182,7 @@ const ContactDetailModal = ({
 </Card>
 
               {/* System Information Card */}
-              <Card>
+<Card>
                 <CardHeader>
                   <CardTitle className="text-lg">System Information</CardTitle>
                 </CardHeader>
@@ -192,7 +192,7 @@ const ContactDetailModal = ({
                     <div className="flex items-center gap-2 mt-1">
                       <ApperIcon name="User" className="h-4 w-4 text-slate-400" />
                       <span className="text-slate-900">
-                        {contact.Owner?.Name || 'Unassigned'}
+                        {contact.owner?.Name || 'Unassigned'}
                       </span>
                     </div>
                   </div>
@@ -202,7 +202,7 @@ const ContactDetailModal = ({
                     <div className="flex items-center gap-2 mt-1">
                       <ApperIcon name="Calendar" className="h-4 w-4 text-slate-400" />
                       <span className="text-slate-600">
-                        {contact.CreatedOn ? format(new Date(contact.CreatedOn), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
+                        {contact.createdAt ? format(new Date(contact.createdAt), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
                       </span>
                     </div>
                   </div>
@@ -212,7 +212,7 @@ const ContactDetailModal = ({
                     <div className="flex items-center gap-2 mt-1">
                       <ApperIcon name="UserCheck" className="h-4 w-4 text-slate-400" />
                       <span className="text-slate-600">
-                        {contact.CreatedBy?.Name || 'System'}
+                        {contact.createdBy?.Name || 'System'}
                       </span>
                     </div>
                   </div>
@@ -222,7 +222,7 @@ const ContactDetailModal = ({
                     <div className="flex items-center gap-2 mt-1">
                       <ApperIcon name="Clock" className="h-4 w-4 text-slate-400" />
                       <span className="text-slate-600">
-                        {contact.ModifiedOn ? format(new Date(contact.ModifiedOn), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
+                        {contact.updatedAt ? format(new Date(contact.updatedAt), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
                       </span>
                     </div>
                   </div>
@@ -232,7 +232,7 @@ const ContactDetailModal = ({
                     <div className="flex items-center gap-2 mt-1">
                       <ApperIcon name="UserCheck" className="h-4 w-4 text-slate-400" />
                       <span className="text-slate-600">
-                        {contact.ModifiedBy?.Name || 'System'}
+                        {contact.modifiedBy?.Name || 'System'}
                       </span>
                     </div>
                   </div>
