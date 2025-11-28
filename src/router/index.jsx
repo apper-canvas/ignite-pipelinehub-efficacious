@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
-import { getRouteConfig } from "./route.utils";
-import Root from "@/layouts/Root";
+import { getRouteConfig } from "@/router/route.utils";
 import Layout from "@/components/organisms/Layout";
+import Root from "@/layouts/Root";
 
 const Dashboard = lazy(() => import("@/components/pages/Dashboard"));
 const Pipeline = lazy(() => import("@/components/pages/Pipeline"));
 const Contacts = lazy(() => import("@/components/pages/Contacts"));
 const Activities = lazy(() => import("@/components/pages/Activities"));
+const Companies = lazy(() => import("@/components/pages/Companies"));
 const Login = lazy(() => import("@/components/pages/Login"));
 const Signup = lazy(() => import("@/components/pages/Signup"));
 const Callback = lazy(() => import("@/components/pages/Callback"));
@@ -45,8 +46,7 @@ const createRoute = ({
   const config = getRouteConfig(configPath);
   const finalAccess = access || config?.allow;
 
-  const route = {
-    ...(index ? { index: true } : { path }),
+const route = {
     element: element ? <Suspense fallback={<LoadingFallback />}>{element}</Suspense> : element,
     handle: {
       access: finalAccess,
@@ -74,9 +74,13 @@ const mainRoutes = [
     path: "contacts", 
     element: <Contacts />
   }),
-  createRoute({
+createRoute({
     path: "activities",
     element: <Activities />
+  }),
+  createRoute({
+    path: "companies",
+    element: <Companies />
   }),
   createRoute({
     path: "*",

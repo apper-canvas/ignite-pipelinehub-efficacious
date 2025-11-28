@@ -1,6 +1,7 @@
-import React, { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
-import ApperIcon from "@/components/ApperIcon"
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import ApperIcon from "@/components/ApperIcon";
+import { cn } from "@/utils/cn";
 
 const Sidebar = () => {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -79,13 +80,14 @@ const Sidebar = () => {
           ))}
         </nav>
 
-        {/* Sidebar Footer */}
+{/* Sidebar Footer */}
         <div className="p-4 border-t border-slate-200">
           <div className="flex items-center gap-3 text-xs text-slate-500">
             <ApperIcon name="Settings" className="h-4 w-4" />
             <span className={isCollapsed ? 'lg:hidden' : ''}>Settings</span>
           </div>
         </div>
+      </div>
       </div>
 
       {/* Mobile Overlay */}
