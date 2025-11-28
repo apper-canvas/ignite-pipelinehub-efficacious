@@ -72,11 +72,6 @@ path: 'activities',
     title: 'Quotes'
   }),
   createRoute({
-    path: 'sales-orders',
-    element: <SalesOrders />,
-    title: 'Sales Orders'
-  }),
-  createRoute({
     path: '*',
     element: <NotFound />,
     title: 'Page Not Found'
@@ -128,9 +123,46 @@ export const router = createBrowserRouter([
       
       // Main application (protected by RLS)
       {
-        path: '',
+path: '',
         element: <Layout />,
-        children: mainRoutes
+        children: [
+          // Dashboard and main routes
+          createRoute({
+            index: true,
+            element: <Dashboard />,
+            title: 'Dashboard'
+          }),
+          createRoute({
+            path: 'companies',
+            element: <Companies />,
+            title: 'Companies'
+          }),
+          createRoute({
+            path: 'contacts',
+            element: <Contacts />,
+            title: 'Contacts'
+          }),
+          createRoute({
+            path: 'pipeline',
+            element: <Pipeline />,
+            title: 'Pipeline'
+          }),
+          createRoute({
+            path: 'activities',
+            element: <Activities />,
+            title: 'Activities'
+          }),
+          createRoute({
+            path: 'quotes',
+            element: <Quotes />,
+            title: 'Quotes'
+          }),
+          createRoute({
+            path: 'sales-orders',
+            element: <SalesOrders />,
+            title: 'Sales Orders'
+          })
+        ]
       }
     ]
   }
