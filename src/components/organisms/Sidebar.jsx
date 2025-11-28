@@ -14,6 +14,7 @@ const navItems = [
     { name: "Contacts", path: "contacts", icon: "Users" },
     { name: "Companies", path: "companies", icon: "Building" },
     { name: "Activities", path: "activities", icon: "Activity" },
+    { name: "Quotes", path: "quotes", icon: "FileText" },
   ]
 
   const isActive = (path) => {
