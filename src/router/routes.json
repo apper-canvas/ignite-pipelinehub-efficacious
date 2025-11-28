@@ -63,7 +63,7 @@
       },
       "redirectOnDeny": "/login"
 }
-  },
+},
   "/quotes": {
     "allow": {
       "when": {
@@ -77,7 +77,47 @@
       "redirectOnDeny": "/login"
     }
   },
-  "/login": {
+  "/sales-orders": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access sales orders",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  }
+},
+  "/quotes",":", {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access quotes",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/sales-orders",":", {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access sales orders",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login"
+    }
+  },
+  "/login",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -89,7 +129,7 @@
       }
     }
   },
-  "/signup": {
+  "/signup",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -101,7 +141,7 @@
       }
     }
   },
-  "/callback": {
+  "/callback",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -113,7 +153,7 @@
       }
     }
   },
-  "/reset-password/*": {
+  "/reset-password/*",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -125,7 +165,7 @@
       }
     }
   },
-  "/prompt-password/*": {
+  "/prompt-password/*",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -137,7 +177,7 @@
       }
     }
   },
-  "/error": {
+  "/error",":", {
     "allow": {
       "when": {
         "conditions": [
@@ -148,5 +188,5 @@
         ]
       }
     }
-  }
-}]}}}}
+  }]
+}}}}
