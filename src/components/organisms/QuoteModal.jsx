@@ -86,34 +86,41 @@ total_amount_c: '0',
     }
   }, [quote]);
 
-  const handleChange = (field, value) => {
+const handleChange = (field, value) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
-    // Clear error when user starts typing
+    // Clear error when user starts typing - ensure immediate clearing
     if (errors[field]) {
-      setErrors(prev => ({
-        ...prev,
-        [field]: ''
-      }));
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        delete newErrors[field];
+        return newErrors;
+      });
     }
   };
 
-const validateForm = () => {
+  const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.title_c || !formData.title_c.trim()) {
+    // Enhanced title validation with better error handling
+    const titleValue = formData.title_c;
+    if (!titleValue || typeof titleValue !== 'string' || titleValue.trim().length === 0) {
       newErrors.title_c = 'Title is required';
     }
 
-    if (!formData.quote_date_c) {
+    // Quote date validation
+    if (!formData.quote_date_c || formData.quote_date_c.trim() === '') {
       newErrors.quote_date_c = 'Quote date is required';
     }
 
     // Only require total amount for non-draft quotes
-    if (formData.status_c !== 'Draft' && (!formData.total_amount_c || parseFloat(formData.total_amount_c) <= 0)) {
-      newErrors.total_amount_c = 'Valid total amount is required for non-draft quotes';
+    if (formData.status_c !== 'Draft') {
+      const totalAmount = formData.total_amount_c;
+      if (!totalAmount || totalAmount.trim() === '' || parseFloat(totalAmount) <= 0) {
+        newErrors.total_amount_c = 'Valid total amount is required for non-draft quotes';
+      }
     }
     
     setErrors(newErrors);
