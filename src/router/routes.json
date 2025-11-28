@@ -9,16 +9,11 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
-  "/pipeline": {
-    "allow": {
-      "when": {
-        "conditions": [
-          {
-},
-  "/companies",":", {
+  "/companies": {
     "allow": {
       "when": {
         "conditions": [
@@ -28,18 +23,12 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
-  "/pipeline",":", {
+  "/contacts": {
     "allow": {
-      "when": {
-        "conditions": [
-          {
-            "label": "User must be authenticated to access pipeline",
-            "rule": "authenticated"
-          }
-        ],
       "when": {
         "conditions": [
           {
@@ -48,7 +37,22 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
+    }
+  },
+  "/pipeline": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "User must be authenticated to access pipeline",
+            "rule": "authenticated"
+          }
+        ]
+      },
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
   "/activities": {
@@ -61,9 +65,10 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
-}
-},
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
+    }
+  },
   "/quotes": {
     "allow": {
       "when": {
@@ -74,7 +79,8 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
   "/sales-orders": {
@@ -87,37 +93,25 @@
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
-  }
-},
-  "/quotes",":", {
+  },
+  "/tasks": {
     "allow": {
       "when": {
         "conditions": [
           {
-            "label": "User must be authenticated to access quotes",
+            "label": "User must be authenticated to access tasks",
             "rule": "authenticated"
           }
         ]
       },
-      "redirectOnDeny": "/login"
+      "redirectOnDeny": "/login",
+      "excludeRedirectQuery": false
     }
   },
-  "/sales-orders",":", {
-    "allow": {
-      "when": {
-        "conditions": [
-          {
-            "label": "User must be authenticated to access sales orders",
-            "rule": "authenticated"
-          }
-        ]
-      },
-      "redirectOnDeny": "/login"
-    }
-  },
-  "/login",":", {
+  "/login": {
     "allow": {
       "when": {
         "conditions": [
@@ -129,7 +123,7 @@
       }
     }
   },
-  "/signup",":", {
+  "/signup": {
     "allow": {
       "when": {
         "conditions": [
@@ -141,7 +135,7 @@
       }
     }
   },
-  "/callback",":", {
+  "/callback": {
     "allow": {
       "when": {
         "conditions": [
@@ -153,7 +147,19 @@
       }
     }
   },
-  "/reset-password/*",":", {
+  "/error": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Error page is public",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/reset-password/*": {
     "allow": {
       "when": {
         "conditions": [
@@ -165,7 +171,7 @@
       }
     }
   },
-  "/prompt-password/*",":", {
+  "/prompt-password/*": {
     "allow": {
       "when": {
         "conditions": [
@@ -176,17 +182,5 @@
         ]
       }
     }
-  },
-  "/error",":", {
-    "allow": {
-      "when": {
-        "conditions": [
-          {
-            "label": "Error page is public",
-            "rule": "public"
-          }
-        ]
-      }
-    }
-  }]
-}}}}
+  }
+}

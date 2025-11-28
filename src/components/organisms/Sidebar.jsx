@@ -39,7 +39,7 @@ function Sidebar() {
       icon: 'Activity',
       label: 'Activities'
     },
-    {
+{
       path: '/quotes',
       icon: 'FileText',
       label: 'Quotes'
@@ -48,6 +48,11 @@ function Sidebar() {
       path: '/sales-orders',
       icon: 'ShoppingCart',
       label: 'Sales Orders'
+    },
+    {
+      path: '/tasks',
+      icon: 'CheckSquare',
+      label: 'Tasks'
     }
   ];
 
