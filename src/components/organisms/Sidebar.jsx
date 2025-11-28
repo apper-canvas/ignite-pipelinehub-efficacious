@@ -8,10 +8,11 @@ const Sidebar = () => {
   const location = useLocation()
   const navigate = useNavigate()
 
-  const navItems = [
+const navItems = [
     { name: "Dashboard", path: "", icon: "BarChart3" },
     { name: "Pipeline", path: "pipeline", icon: "Workflow" },
     { name: "Contacts", path: "contacts", icon: "Users" },
+    { name: "Companies", path: "companies", icon: "Building" },
     { name: "Activities", path: "activities", icon: "Activity" },
   ]
 
@@ -86,8 +87,7 @@ const Sidebar = () => {
             <ApperIcon name="Settings" className="h-4 w-4" />
             <span className={isCollapsed ? 'lg:hidden' : ''}>Settings</span>
           </div>
-        </div>
-      </div>
+</div>
       </div>
 
       {/* Mobile Overlay */}
