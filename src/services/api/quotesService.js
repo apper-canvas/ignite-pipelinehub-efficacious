@@ -1,6 +1,5 @@
-import { toast } from 'react-toastify';
 import { getApperClient } from '@/services/apperClient';
-
+import { toast } from 'react-toastify';
 class QuotesService {
   constructor() {
     this.tableName = 'quote_c';
