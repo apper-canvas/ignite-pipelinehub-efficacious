@@ -100,10 +100,10 @@ total_amount_c: '0',
     }
   };
 
-  const validateForm = () => {
+const validateForm = () => {
     const newErrors = {};
 
-    if (!formData.title_c.trim()) {
+    if (!formData.title_c || !formData.title_c.trim()) {
       newErrors.title_c = 'Title is required';
     }
 
@@ -111,10 +111,11 @@ total_amount_c: '0',
       newErrors.quote_date_c = 'Quote date is required';
     }
 
-// Only require total amount for non-draft quotes
+    // Only require total amount for non-draft quotes
     if (formData.status_c !== 'Draft' && (!formData.total_amount_c || parseFloat(formData.total_amount_c) <= 0)) {
       newErrors.total_amount_c = 'Valid total amount is required for non-draft quotes';
     }
+    
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
