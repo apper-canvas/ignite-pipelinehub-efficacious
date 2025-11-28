@@ -12,7 +12,7 @@ function Sidebar() {
     return location.pathname === path || location.pathname.startsWith(path + '/');
   };
 
-  const navigationItems = [
+const navigationItems = [
     {
       path: '/',
       icon: 'BarChart3',
@@ -39,7 +39,7 @@ function Sidebar() {
       icon: 'Activity',
       label: 'Activities'
     },
-{
+    {
       path: '/quotes',
       icon: 'FileText',
       label: 'Quotes'
