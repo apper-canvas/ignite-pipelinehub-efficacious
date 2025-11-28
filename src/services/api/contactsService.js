@@ -10,8 +10,7 @@ class ContactsService {
     try {
       await this.delay();
       const apperClient = getApperClient();
-      
-      const response = await apperClient.fetchRecords('contact_c', {
+const response = await apperClient.fetchRecords('contact_c', {
         fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
@@ -22,8 +21,11 @@ class ContactsService {
           {"field": {"Name": "company_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "Tags"}},
+          {"field": {"Name": "Owner"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}}
         ]
       });
 
@@ -38,7 +40,7 @@ class ContactsService {
       }
 
       // Map database fields to expected UI format
-      return response.data.map(contact => ({
+return response.data.map(contact => ({
         Id: contact.Id,
         name: contact.Name || `${contact.first_name_c || ''} ${contact.last_name_c || ''}`.trim(),
         firstName: contact.first_name_c || "",
@@ -48,8 +50,11 @@ class ContactsService {
         company: contact.company_c || "",
         notes: contact.notes_c || "",
         tags: contact.Tags ? contact.Tags.split(',') : [],
+        owner: contact.Owner || null,
         createdAt: contact.CreatedOn,
-        updatedAt: contact.ModifiedOn
+        createdBy: contact.CreatedBy || null,
+        updatedAt: contact.ModifiedOn,
+        modifiedBy: contact.ModifiedBy || null
       }));
     } catch (error) {
       console.error("Error fetching contacts:", error?.response?.data?.message || error);
@@ -62,7 +67,7 @@ class ContactsService {
       await this.delay();
       const apperClient = getApperClient();
       
-      const response = await apperClient.getRecordById('contact_c', parseInt(id), {
+const response = await apperClient.getRecordById('contact_c', parseInt(id), {
         fields: [
           {"field": {"Name": "Id"}},
           {"field": {"Name": "Name"}},
@@ -73,8 +78,11 @@ class ContactsService {
           {"field": {"Name": "company_c"}},
           {"field": {"Name": "notes_c"}},
           {"field": {"Name": "Tags"}},
+          {"field": {"Name": "Owner"}},
           {"field": {"Name": "CreatedOn"}},
-          {"field": {"Name": "ModifiedOn"}}
+          {"field": {"Name": "CreatedBy"}},
+          {"field": {"Name": "ModifiedOn"}},
+          {"field": {"Name": "ModifiedBy"}}
         ]
       });
 
@@ -83,7 +91,7 @@ class ContactsService {
       }
 
       const contact = response.data;
-      return {
+return {
         Id: contact.Id,
         name: contact.Name || `${contact.first_name_c || ''} ${contact.last_name_c || ''}`.trim(),
         firstName: contact.first_name_c || "",
@@ -93,8 +101,11 @@ class ContactsService {
         company: contact.company_c || "",
         notes: contact.notes_c || "",
         tags: contact.Tags ? contact.Tags.split(',') : [],
+        owner: contact.Owner || null,
         createdAt: contact.CreatedOn,
-        updatedAt: contact.ModifiedOn
+        createdBy: contact.CreatedBy || null,
+        updatedAt: contact.ModifiedOn,
+        modifiedBy: contact.ModifiedBy || null
       };
     } catch (error) {
       console.error(`Error fetching contact ${id}:`, error?.response?.data?.message || error);
@@ -142,7 +153,7 @@ class ContactsService {
         
         if (successful.length > 0) {
           const createdContact = successful[0].data;
-          return {
+return {
             Id: createdContact.Id,
             name: createdContact.Name,
             firstName: createdContact.first_name_c || "",
@@ -152,8 +163,11 @@ class ContactsService {
             company: createdContact.company_c || "",
             notes: createdContact.notes_c || "",
             tags: createdContact.Tags ? createdContact.Tags.split(',') : [],
+            owner: createdContact.Owner || null,
             createdAt: createdContact.CreatedOn,
-            updatedAt: createdContact.ModifiedOn
+            createdBy: createdContact.CreatedBy || null,
+            updatedAt: createdContact.ModifiedOn,
+            modifiedBy: createdContact.ModifiedBy || null
           };
         }
       }
@@ -225,7 +239,7 @@ if (contactData.company !== undefined) {
         if (successful.length > 0) {
           const updatedContact = successful[0].data;
           return {
-            Id: updatedContact.Id,
+Id: updatedContact.Id,
             name: updatedContact.Name,
             firstName: updatedContact.first_name_c || "",
             lastName: updatedContact.last_name_c || "",
@@ -234,8 +248,11 @@ if (contactData.company !== undefined) {
             company: updatedContact.company_c || "",
             notes: updatedContact.notes_c || "",
             tags: updatedContact.Tags ? updatedContact.Tags.split(',') : [],
+            owner: updatedContact.Owner || null,
             createdAt: updatedContact.CreatedOn,
-            updatedAt: updatedContact.ModifiedOn
+            createdBy: updatedContact.CreatedBy || null,
+            updatedAt: updatedContact.ModifiedOn,
+            modifiedBy: updatedContact.ModifiedBy || null
           };
         }
       }

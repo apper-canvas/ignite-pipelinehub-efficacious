@@ -50,15 +50,19 @@ const ContactTable = ({
     return sortConfig.direction === "asc" ? "ArrowUp" : "ArrowDown"
   }
 
-  const columns = [
+const columns = [
     { key: "name", label: "Name", sortable: true },
     { key: "company", label: "Company", sortable: true },
     { key: "email", label: "Email", sortable: true },
     { key: "phone", label: "Phone", sortable: false },
     { key: "tags", label: "Tags", sortable: false },
+    { key: "owner", label: "Owner", sortable: true },
     { key: "deals", label: "Deals", sortable: false },
     { key: "value", label: "Total Value", sortable: true },
-    { key: "updatedAt", label: "Last Activity", sortable: true },
+    { key: "createdAt", label: "Created On", sortable: true },
+    { key: "createdBy", label: "Created By", sortable: true },
+    { key: "updatedAt", label: "Modified On", sortable: true },
+    { key: "modifiedBy", label: "Modified By", sortable: true },
     { key: "actions", label: "Actions", sortable: false },
   ]
 
@@ -192,6 +196,13 @@ const ContactTable = ({
                         </Badge>
                       )}
                     </div>
+</td>
+
+                  {/* Owner */}
+                  <td className="p-4">
+                    <span className="text-sm text-slate-600">
+                      {contact.owner?.Name || 'Unassigned'}
+                    </span>
                   </td>
                   
                   <td className="p-4">
@@ -206,9 +217,39 @@ const ContactTable = ({
                     </span>
                   </td>
                   
+<td className="p-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-lg font-semibold text-success-600">
+                        ${contactValue.toLocaleString()}
+                      </span>
+                    </div>
+                  </td>
+
+                  {/* Created On */}
                   <td className="p-4">
                     <span className="text-sm text-slate-500">
-                      {format(new Date(contact.updatedAt), "MMM dd, yyyy")}
+                      {contact.createdAt ? format(new Date(contact.createdAt), "MMM dd, yyyy") : 'N/A'}
+                    </span>
+                  </td>
+
+                  {/* Created By */}
+                  <td className="p-4">
+                    <span className="text-sm text-slate-600">
+                      {contact.createdBy?.Name || 'System'}
+                    </span>
+                  </td>
+
+                  {/* Modified On */}
+                  <td className="p-4">
+                    <span className="text-sm text-slate-500">
+                      {contact.updatedAt ? format(new Date(contact.updatedAt), "MMM dd, yyyy") : 'N/A'}
+                    </span>
+                  </td>
+
+                  {/* Modified By */}
+                  <td className="p-4">
+                    <span className="text-sm text-slate-600">
+                      {contact.modifiedBy?.Name || 'System'}
                     </span>
                   </td>
                   

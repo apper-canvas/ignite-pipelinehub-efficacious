@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react"
-import Button from "@/components/atoms/Button"
-import FormField from "@/components/molecules/FormField"
-import TagInput from "@/components/molecules/TagInput"
-import ApperIcon from "@/components/ApperIcon"
-import { toast } from "react-toastify"
+import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { format } from "date-fns";
+import ApperIcon from "@/components/ApperIcon";
+import Button from "@/components/atoms/Button";
+import TagInput from "@/components/molecules/TagInput";
+import FormField from "@/components/molecules/FormField";
 
 const ContactModal = ({ 
   contact = null, 
@@ -157,7 +158,61 @@ const ContactModal = ({
             error={errors.notes}
             placeholder="Add any additional notes..."
             rows={3}
-          />
+/>
+
+          {/* System Audit Fields - Read Only */}
+          {contact && (
+            <div className="space-y-4 pt-6 border-t border-slate-200">
+              <h3 className="text-lg font-medium text-slate-900">System Information</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Owner</label>
+                  <div className="p-3 bg-slate-50 rounded-md">
+                    <span className="text-sm text-slate-600">
+                      {contact.owner?.Name || 'Unassigned'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Created On</label>
+                  <div className="p-3 bg-slate-50 rounded-md">
+                    <span className="text-sm text-slate-600">
+                      {contact.createdAt ? format(new Date(contact.createdAt), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Created By</label>
+                  <div className="p-3 bg-slate-50 rounded-md">
+                    <span className="text-sm text-slate-600">
+                      {contact.createdBy?.Name || 'System'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Last Modified</label>
+                  <div className="p-3 bg-slate-50 rounded-md">
+                    <span className="text-sm text-slate-600">
+                      {contact.updatedAt ? format(new Date(contact.updatedAt), "MMM dd, yyyy 'at' h:mm a") : 'N/A'}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2">
+                  <label className="text-sm font-medium text-slate-700">Modified By</label>
+                  <div className="p-3 bg-slate-50 rounded-md">
+                    <span className="text-sm text-slate-600">
+                      {contact.modifiedBy?.Name || 'System'}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           <div className="flex justify-end gap-3 pt-4">
             <Button type="button" variant="outline" onClick={onClose}>
