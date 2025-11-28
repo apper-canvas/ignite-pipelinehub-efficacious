@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Outlet } from "react-router-dom"
 import { ToastContainer } from "react-toastify"
 import Header from "@/components/organisms/Header"
+import Sidebar from "@/components/organisms/Sidebar"
 import ContactModal from "@/components/organisms/ContactModal"
 import DealModal from "@/components/organisms/DealModal"
 import { useContacts } from "@/hooks/useContacts"
@@ -34,16 +35,20 @@ const Layout = () => {
     setIsDealModalOpen(false)
   }
 
-  return (
-    <div className="min-h-screen bg-slate-50">
-      <Header 
-        onAddContact={handleAddContact}
-        onAddDeal={handleAddDeal}
-      />
+return (
+    <div className="min-h-screen bg-slate-50 flex">
+      <Sidebar />
       
-      <main className="flex-1">
-        <Outlet />
-      </main>
+      <div className="flex-1 flex flex-col lg:ml-0">
+        <Header 
+          onAddContact={handleAddContact}
+          onAddDeal={handleAddDeal}
+        />
+        
+        <main className="flex-1 lg:pl-0">
+          <Outlet />
+        </main>
+      </div>
 
       <ContactModal
         isOpen={isContactModalOpen}

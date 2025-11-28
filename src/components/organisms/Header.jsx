@@ -36,15 +36,7 @@ const Header = ({ onAddContact, onAddDeal }) => {
                     <h1 className="text-xl font-bold text-slate-900">PipelineHub</h1>
                 </div>
                 {/* Desktop Navigation */}
-                <nav className="hidden lg:flex items-center space-x-1">
-                    {navItems.map(item => <button
-                        key={item.path}
-                        onClick={() => navigate(item.path === "" ? "/" : `/${item.path}`)}
-                        className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors ${isActive(item.path) ? "bg-primary-100 text-primary-700 border-b-2 border-primary-600" : "text-slate-600 hover:text-slate-900 hover:bg-slate-100"}`}>
-                        <ApperIcon name={item.icon} className="h-4 w-4" />
-                        {item.name}
-                    </button>)}
-                </nav>
+{/* Navigation moved to Sidebar */}
             </div>
             {/* Search and Actions */}
             <div className="flex items-center gap-4">
